@@ -1,0 +1,19 @@
+{
+  "name": "sola",
+  "version": "1.0.0",
+  "description": "App for solo female travelers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sola-travel/sola.git"
+  },
+  "author": "YuChao Dong, Nitika Nadgar, Angela Lin, Lisa Gibson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sola-travel/sola/issues"
+  },
+  "homepage": "https://github.com/sola-travel/sola#readme"
+}
