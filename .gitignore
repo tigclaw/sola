@@ -1,0 +1,9 @@
+/node_modules
+bundle.js
+
+# Visual Studio
+.vscode/*
+
+# System Files
+.DS_Store
+Thumbs.db
