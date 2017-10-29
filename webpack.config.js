@@ -6,14 +6,15 @@ module.exports = {
     './main.js',
   ],
   output: {
-    path: path.join(__dirname, 'www'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        include: path.join(__dirname, '/client/'),
+        exclude: path.join(__dirname, '/node_modules/'),
         use: [
           'babel-loader',
         ],
