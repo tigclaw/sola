@@ -1,7 +1,11 @@
-const UserPastTrip = sequelize.define('userPastTrip', {
-  destinationName: Sequelize.STRING,
-})
+module.exports = (sequelize, DataTypes) => {
+  const UserPastTrip = sequelize.define('userPastTrip', {
+    destinationName: DataTypes.STRING,
+  });
 
-UserPastTrip.belongsTo(User);
+  UserPastTrip.associate = (models) => {
+    UserPastTrip.belongsTo(models.User);
+  };
 
-export default UserPastTrip;
+  return UserPastTrip;
+};

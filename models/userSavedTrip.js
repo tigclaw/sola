@@ -1,10 +1,14 @@
-const UserSavedTrip = sequelize.define('userSavedTrip', {
-  destinationName: Sequelize.STRING,
-  savedSights: Sequelize.STRING,
-  savedLodging: Sequelize.STRING,
-  savedDining: Sequelize.STRING,
-})
+module.exports = (sequelize, DataTypes) => {
+  const UserSavedTrip = sequelize.define('userSavedTrip', {
+    destinationName: DataTypes.STRING,
+    savedSights: DataTypes.STRING, // to edit
+    savedLodging: DataTypes.STRING, // to edit
+    savedDining: DataTypes.STRING, // to edit
+  });
 
-UserSavedTrip.belongsTo(User);
+  UserSavedTrip.associate = (models) => {
+    UserSavedTrip.belongsTo(models.User);
+  };
 
-export default UserSavedTrip;
+  return UserSavedTrip;
+};

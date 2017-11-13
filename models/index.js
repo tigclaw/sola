@@ -1,39 +1,35 @@
-const postgres = require('pg');
+const fs = require('fs');
+const path = require('path');
 const Sequelize = require('sequelize');
 
-var sequelize = new Sequelize('sola', 'postgres', '', {
-  host: 'localhost',
-  dialect: 'postgres',
-})
+let db = {};
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('[Sqlize] connection success!');
-  })
-  .catch(err => {
-    console.log('[Sqlize] connection error', err);
+// For running a local PostGres database named 'sola'
+let sequelize = new Sequelize('sola', 'postgres', '',
+  {
+    host: 'localhost',
+    dialect: 'postgres',
   });
-  
-const User = sequelize.define('user', {
-  firstName: {
-    type: Sequelize.STRING
-  },
-  lastName: {
-    type: Sequelize.STRING
+
+// This checks for all .js files in the models folder and associates them here
+fs
+  .readdirSync(__dirname)
+  .filter(file =>
+    (file.indexOf('.') !== 0) &&
+    (file !== 'index.js') &&
+    (file.slice(-3) === '.js'))
+  .forEach(file => {
+    const model = sequelize.import(path.join(__dirname, file));
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
   }
 });
 
-// force: true will drop the table if it already exists
-User.sync({force: true}).then(() => {
-  // Table created
-  return User.create({
-    firstName: 'John',
-    lastName: 'Hancock'
-  });
-});
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-// Set up Models in database
-
-
-// module.exports.sequelize = sequelize;
+module.exports = db;

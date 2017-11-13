@@ -1,27 +1,19 @@
-// "use strict";
-// 
-// module.exports = function(sequelize, DataTypes) {
-//   var User = sequelize.define("User", {
-//     username: DataTypes.STRING
-//   });
-// 
-//   User.associate = function(models) {
-//     User.hasMany(models.Task);
-//   }
-// 
-//   return User;
-// };
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    email: DataTypes.STRING,
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
+    gender: DataTypes.STRING,
+    hometown: DataTypes.STRING,
+    age: DataTypes.STRING,
+    profession: DataTypes.STRING,
+    isVerified: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+  });
 
-const User = sequelize.define('user', {
-  email: Sequelize.STRING,
-  firstName: Sequelize.STRING,
-  lastName: Sequelize.STRING,
-  phoneNumber: Sequelize.STRING,
-  gender: Sequelize.STRING,
-  hometown: Sequelize.STRING,
-  age: Sequelize.STRING,
-  profession: Sequelize.STRING,
-  isVerified: { Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
-})
+  User.associate = (models) => {
 
-export default User;
+  };
+
+  return User;
+};
